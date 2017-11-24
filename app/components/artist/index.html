@@ -1,0 +1,37 @@
+<ul class="artists no-padding">
+    <li ng-repeat="artist in artists" class="artist">
+        <figure class="figure">
+            <img src="{{artist.image_url}}" width="200" alt="" class="img-responsive">
+
+            <ul class="description">
+                <li class="name"><i class="icon-user"></i> <a href="{{artist.url}}" target="_blank">{{artist.name}}</a></li>
+                <li class="name"><i class="icon-social-facebook"></i> <a href="{{artist.facebook_page_url}}">View profile</a></li>
+            </ul>
+        </figure>
+        <div class="accordions">
+            <div class="alert alert-info" ng-hide="artists.events.length">
+                <strong>Info!</strong> There's no event registered to {{artist.name}}
+            </div>
+
+            <div class="accordion" ng-repeat="event in artists.events">
+                <div class="blue"><span class="number">#{{$index + 1}}</span></div>
+                <div class="panelContent p{{$index + 1}}"><i class="icon-event"></i> Event {{$index + 1}} <strong> <br/>
+                <ul class="events">
+                    <li><i class="icon-location-pin"></i> {{event.venue.name}}, {{event.venue.city}}</strong> - {{event.venue.country}} - {{event.venue.region}}</li>
+                    <li><i class="icon-calendar"></i> {{event.datetime}}</li>
+                </ul>
+
+                <div class="actions">
+
+                    <!-- Google Maps -->
+                    <a href="https://www.google.com.br/maps/search/{{event.venue.name}} + {{event.venue.city}} + {{event.venue.region}}/@{{event.venue.latitude}},{{event.venue.longitude}},15z/data=!3m1!4b1?dcr=0" target="_blank" class="btn btn-info"><i class="icon-map"></i> Gogle Maps</a>
+                    <!-- Ticket -->
+                    <a href="{{offers.url}}" ng-hide="offers.length"  ng-repeat="offers in event.offers" target="_blank" title="Lineup's event with {{event.lineup}}" class="btn btn-warning"><i class="icon-link"></i> Buy Ticket</a>
+                    
+                
+                </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
